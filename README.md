@@ -1,4 +1,4 @@
-# BRAVA — App para Barbearias
+# LA BRAVA — App para Barbearias
 
 App web responsivo em português com agendamentos, gestão de clientes, serviços, profissionais, agenda da equipe e indicadores. Mantém HTML, CSS e JavaScript puro, sem framework, build ou dependências de execução.
 
