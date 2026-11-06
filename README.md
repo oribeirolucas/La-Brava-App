@@ -1,4 +1,4 @@
-# LA BRAVA — App para Barbearias
+# La Brava App
 
 App web responsivo em português com agendamentos, gestão de clientes, serviços, profissionais, agenda da equipe e indicadores. Mantém HTML, CSS e JavaScript puro, sem framework, build ou dependências de execução.
 
@@ -108,7 +108,7 @@ O teste de navegador abre seu próprio servidor temporário, usa contextos isola
 ```text
 dist/
   index.html                 Estrutura e navegação
-  styles.css                 Identidade BRAVA e regras responsivas
+  styles.css                 Identidade La Brava App e regras responsivas
   app.js                     Inicialização, composição e ações
   modules/
     config.js                Catálogo inicial, status e configuração

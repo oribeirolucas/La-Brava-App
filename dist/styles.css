@@ -39,8 +39,8 @@ aside {
   flex-direction: column;
 }
 .brand {
-  font: 800 32px Manrope, sans-serif;
-  letter-spacing: 5px;
+  font: 800 21px Manrope, sans-serif;
+  letter-spacing: 0.5px;
 }
 .brand small {
   display: block;

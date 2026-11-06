@@ -1,4 +1,4 @@
-# Validação da evolução BRAVA
+# Validação da evolução La Brava App
 
 ## Inspeção inicial
 

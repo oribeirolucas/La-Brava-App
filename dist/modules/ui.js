@@ -43,7 +43,7 @@ export function showError(error) {
 export function openEditor(title, content) {
   const dialog = $("#editor");
   if (dialog.open) dialog.close();
-  dialog.innerHTML = `<button class="close" type="button" data-close aria-label="Fechar janela">×</button><span class="eyebrow">BRAVA · SEU ESPAÇO</span><h2 id="editorTitle">${esc(title)}</h2><div id="dialogFeedback" role="status" aria-live="polite"></div>${content}`;
+  dialog.innerHTML = `<button class="close" type="button" data-close aria-label="Fechar janela">×</button><span class="eyebrow">La Brava App · SEU ESPAÇO</span><h2 id="editorTitle">${esc(title)}</h2><div id="dialogFeedback" role="status" aria-live="polite"></div>${content}`;
   dialog.showModal();
   $("[data-close]", dialog).onclick = () => dialog.close();
   return dialog;
