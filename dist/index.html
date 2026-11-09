@@ -13,9 +13,20 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="responsive.css" />
   </head>
   <body>
-    <aside>
+    <aside id="sidebar" aria-label="Menu principal">
+      <button
+        type="button"
+        class="sidebar-close icon-button"
+        id="closeNavigation"
+        aria-label="Fechar menu de navegação"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m6 6 12 12M18 6 6 18" />
+        </svg>
+      </button>
       <div class="brand">
         La Brava App<span>.</span><small>BARBEARIA & ESTILO</small>
       </div>
@@ -44,15 +55,67 @@
         <p>Estilo que acompanha você. ↗</p>
       </div>
     </aside>
+    <button
+      type="button"
+      class="navigation-backdrop"
+      id="navigationBackdrop"
+      aria-label="Fechar menu de navegação"
+      tabindex="-1"
+      hidden
+    ></button>
     <a class="skip-link" href="#content">Pular para o conteúdo</a>
     <main id="content" tabindex="-1">
-      <header>
-        <span class="crumb"
-          >Seu espaço / <span id="breadcrumb">Visão geral</span></span
-        >
+      <header class="app-header">
+        <div class="header-location">
+          <button
+            type="button"
+            class="navigation-toggle icon-button"
+            id="navigationToggle"
+            aria-label="Abrir menu de navegação"
+            aria-expanded="false"
+            aria-controls="sidebar"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          <div class="header-labels">
+            <span class="mobile-brand">La Brava App<span>.</span></span>
+            <span class="crumb"
+              >Seu espaço <span aria-hidden="true">/</span>
+              <span id="breadcrumb">Visão geral</span></span
+            >
+          </div>
+        </div>
         <div class="profile">
-          <span>Olá, bem-vindo</span>
-          <div class="avatar">B.</div>
+          <button
+            type="button"
+            class="profile-trigger"
+            id="profileTrigger"
+            aria-label="Abrir menu do seu espaço"
+            aria-expanded="false"
+            aria-controls="profileMenu"
+          >
+            <span class="profile-greeting">Olá, bem-vindo</span>
+            <span class="avatar" aria-hidden="true">LB</span>
+            <svg class="profile-chevron" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <div class="profile-menu" id="profileMenu" hidden>
+            <div class="profile-menu-heading">
+              <strong>La Brava App</strong><span>Seu espaço</span>
+            </div>
+            <nav aria-label="Atalhos do seu espaço">
+              <button type="button" data-action="new-booking">
+                Agendar um horário <span aria-hidden="true">↗</span>
+              </button>
+              <button type="button" data-view="bookings">Agendamentos</button>
+              <button type="button" data-view="settings">
+                Dados e privacidade
+              </button>
+            </nav>
+          </div>
         </div>
       </header>
       <div class="notice demo-banner">
@@ -80,8 +143,8 @@
             <span class="eyebrow">O CLÁSSICO NUNCA SAI DE ESTILO</span>
             <h2>Na régua. No detalhe.<br />Do seu jeito.</h2>
             <p>
-              Cuidado de verdade, conversa boa e um visual<br />à altura de quem
-              você é.
+              Cuidado de verdade, conversa boa e um visual<br />
+              à altura de quem você é.
             </p>
             <button class="primary" data-action="new-booking">
               Agendar meu horário <span>↗</span>

@@ -16,6 +16,14 @@ Abra **http://localhost:8000**. Use um servidor HTTP: os módulos JavaScript nã
 
 O app funciona sem Node e sem instalar pacotes. Google Fonts e a fotografia de apresentação dependem de internet; fontes locais e um fundo de cor são usados quando indisponíveis. Não há analytics. O navegador precisa oferecer módulos ES, `dialog` e `structuredClone` (versões atuais de Chrome, Edge, Firefox e Safari).
 
+## Navegação e responsividade
+
+- Menu do cabeçalho com atalhos para agendar, consultar reservas e acessar dados e privacidade.
+- Menu lateral recolhível em telas de até 960 px, com fechamento por toque fora, Escape e controle de foco pelo teclado.
+- Cabeçalho compacto e fixo em celular/tablet; cards, filtros e formulários adaptados a telas estreitas.
+- Modais com rolagem própria e limites de altura; campos com tamanho de texto que evita zoom automático em formulários no celular.
+- Estilos de layout centralizados em `dist/responsive.css`; controles em `dist/modules/navigation.js`.
+
 ## O que está implementado
 
 ### Agendamentos
@@ -93,12 +101,14 @@ Para os testes de navegador (dependência apenas de desenvolvimento):
 npm ci
 npx playwright install chromium
 npm run test:browser
+npm run test:responsive
 ```
 
 Ou use um Chromium existente:
 
 ```sh
 CHROMIUM_PATH=/usr/bin/chromium npm run test:browser
+CHROMIUM_PATH=/usr/bin/chromium npm run test:responsive
 ```
 
 O teste de navegador abre seu próprio servidor temporário, usa contextos isolados e dados fictícios; não altera dados do app publicado. Os testes cobrem validações, referências e snapshots, migração, conflitos, domingo/horários passados, almoço/férias/bloqueios, cancelamento/remarcação, arquivamento, persistência, erros de armazenamento, escape de HTML, navegação, teclado e layout móvel. Veja [docs/VALIDATION.md](docs/VALIDATION.md).
@@ -108,7 +118,8 @@ O teste de navegador abre seu próprio servidor temporário, usa contextos isola
 ```text
 dist/
   index.html                 Estrutura e navegação
-  styles.css                 Identidade La Brava App e regras responsivas
+  styles.css                 Estilos visuais dos componentes
+  responsive.css             Cabeçalho, menus e layout responsivo
   app.js                     Inicialização, composição e ações
   modules/
     config.js                Catálogo inicial, status e configuração
@@ -119,6 +130,7 @@ dist/
     clients.js               Validação e estatísticas de clientes
     services.js              Validação de serviços e profissionais
     ui.js                    Formulários, diálogo e feedback acessível
+    navigation.js            Menu de atalhos e navegação recolhível
     booking-view.js          Fluxo e lista de reservas
     client-view.js           Gestão e histórico de clientes
     catalog-view.js          Gestão de catálogo, equipe e bloqueios

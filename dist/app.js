@@ -23,6 +23,7 @@ import { setupBookings } from "./modules/booking-view.js";
 import { setupClients } from "./modules/client-view.js";
 import { setupCatalog } from "./modules/catalog-view.js";
 import { setupAdmin } from "./modules/admin-view.js";
+import { setupNavigation } from "./modules/navigation.js";
 const VIEWS = {
   home: "Visão geral",
   bookings: "Agendamentos",
@@ -82,7 +83,7 @@ const ctx = {
     this.view = view;
     for (const key of Object.keys(VIEWS))
       $("#" + key).classList.toggle("hidden", key !== view);
-    $$("nav button").forEach((b) => {
+    $$("#sidebar nav button").forEach((b) => {
       const active = b.dataset.view === view;
       b.classList.toggle("active", active);
       if (active) b.setAttribute("aria-current", "page");
@@ -94,6 +95,7 @@ const ctx = {
     if (view === "dashboard") this.renderDashboard();
   },
 };
+setupNavigation();
 setupBookings(ctx);
 setupClients(ctx);
 setupCatalog(ctx);

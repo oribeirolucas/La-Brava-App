@@ -60,3 +60,19 @@ Adicionados:
 - `docs/ARCHITECTURE.md`
 - `docs/ROADMAP.md`
 - `docs/VALIDATION.md`
+
+## Revisão de responsividade — 09/11/2026
+
+O cabeçalho recebeu um menu de atalhos funcional. Até 960 px, a navegação passa a um painel lateral com backdrop, rolagem própria, fechamento por toque fora/Escape e ciclo de foco por teclado. O cabeçalho permanece visível no celular/tablet; o texto de boas-vindas cede espaço ao avatar em telas estreitas. Cards, filtros e modais foram ajustados sem alterar o modelo de dados.
+
+Validações adicionais em Chromium (`npm run test:responsive`):
+
+- Oito áreas em dez larguras: 320, 360, 390, 600, 768, 960, 1024, 1280, 1440 e 1920 px. Sem overflow horizontal ou sobreposição entre localização e perfil no cabeçalho.
+- Quatro formulários em cada largura (40 combinações): agendamento, cliente, serviço e profissional. Modais dentro da tela, com rolagem e fechamento por Escape.
+- Menu de atalhos: abrir, navegar, fechar por fora/Escape, abrir por teclado e retorno de foco.
+- Painel lateral: seleção de tela, fechamento por fora/Escape, foco contido enquanto aberto, reconfiguração ao redimensionar.
+- Emulação de toque em retrato (390×844) e paisagem (844×390); menu e formulário dentro da área visível.
+- Inspeção visual de capturas do cabeçalho/menu no desktop, início e navegação no celular; recursos externos bloqueados para conferir o fallback.
+- Suíte anterior de navegador executada novamente e aprovada para verificar os fluxos existentes.
+
+Não houve teste em dispositivo físico ou no Safari. Os ajustes estão em `dist/responsive.css` e `dist/modules/navigation.js`; estrutura e composição em `dist/index.html` e `dist/app.js`. Os testes usam `tests/responsive.mjs`, `tests/browser.mjs` e o servidor compartilhado `tests/server.mjs`.

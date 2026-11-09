@@ -1,0 +1,707 @@
+/* Shell and responsive behavior. Business screens keep their existing styles. */
+:root {
+  --sidebar-width: 240px;
+  --page-gutter: clamp(24px, 3.4vw, 60px);
+}
+[hidden] {
+  display: none !important;
+}
+body {
+  min-width: 0;
+}
+#sidebar {
+  width: var(--sidebar-width);
+  height: 100dvh;
+  padding: 36px 24px 24px;
+  z-index: 60;
+  overscroll-behavior: contain;
+}
+#sidebar .brand {
+  white-space: nowrap;
+  font-size: 21px;
+}
+#sidebar nav {
+  display: grid;
+  margin-top: 36px;
+  gap: 6px;
+  overflow: visible;
+}
+#sidebar nav button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: normal;
+  line-height: 1.5;
+  padding: 12px;
+  min-width: 0;
+}
+#sidebar nav b {
+  display: block;
+  flex: 0 0 18px;
+  margin: 0;
+  text-align: center;
+}
+#sidebar .sidebottom {
+  margin-top: auto;
+  padding-top: 20px;
+}
+main {
+  margin-left: var(--sidebar-width);
+  max-width: none;
+  padding: 0 var(--page-gutter) 32px;
+}
+.app-header {
+  height: auto;
+  min-height: 94px;
+  gap: 16px;
+  position: relative;
+  z-index: 30;
+}
+.header-location {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.header-labels {
+  min-width: 0;
+}
+.crumb {
+  display: block;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.profile {
+  position: relative;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 6px 8px 6px 12px;
+  color: var(--ink);
+  border: 1px solid transparent;
+  background: transparent;
+  border-radius: 12px;
+}
+.profile-trigger:hover,
+.profile-trigger[aria-expanded="true"] {
+  background: #eef1e7;
+  border-color: var(--line);
+}
+.profile-greeting {
+  font-size: 13px;
+  white-space: nowrap;
+}
+.profile-trigger .avatar {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  font-size: 11px;
+}
+.profile-chevron {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  transition: transform 0.15s;
+}
+.profile-trigger[aria-expanded="true"] .profile-chevron {
+  transform: rotate(180deg);
+}
+.profile-menu {
+  position: absolute;
+  inset: calc(100% + 8px) 0 auto auto;
+  width: 264px;
+  max-width: calc(100vw - 32px);
+  padding: 8px;
+  border-radius: 12px;
+  background: #fff;
+  max-height: min(420px, calc(100dvh - 100px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-shadow: 0 12px 40px #17272424;
+  border: 1px solid var(--line);
+}
+.profile-menu-heading {
+  display: grid;
+  gap: 4px;
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.profile-menu-heading strong {
+  font-family: Manrope, sans-serif;
+  font-size: 14px;
+}
+.profile-menu-heading > span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.profile-menu nav {
+  display: grid;
+  gap: 4px;
+  margin: 6px 0 0;
+  width: 100%;
+  padding: 0;
+  overflow: visible;
+}
+.profile-menu nav button {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  color: var(--ink);
+  padding: 12px;
+  border-radius: 7px;
+  font-size: 13px;
+  white-space: normal;
+}
+.profile-menu nav button:hover,
+.profile-menu nav button:focus-visible {
+  background: #f0f3eb;
+}
+.icon-button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  border-radius: 8px;
+}
+.icon-button svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  fill: none;
+}
+.navigation-toggle,
+.sidebar-close,
+.mobile-brand {
+  display: none;
+}
+.navigation-backdrop {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  background: #10231a80;
+  border: 0;
+  padding: 0;
+  z-index: 50;
+  cursor: default;
+}
+.navigation-open {
+  overflow: hidden;
+}
+.skip-link {
+  z-index: 100;
+}
+.intro > div,
+.sectionhead > div,
+.bookingCard > div,
+.clientCard > div,
+.visit > div,
+.barber > span {
+  min-width: 0;
+}
+.intro,
+.sectionhead {
+  flex-wrap: wrap;
+}
+h1,
+h2,
+h3,
+.barber strong,
+.service .price {
+  overflow-wrap: anywhere;
+}
+.services {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.cards {
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+}
+.lower {
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+}
+.metrics {
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+}
+.barbers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+}
+.barber {
+  width: 100%;
+}
+.barber > .avatar {
+  flex: 0 0 37px;
+}
+.service {
+  display: flex;
+  flex-direction: column;
+}
+.servicefooter {
+  gap: 12px;
+  margin-top: auto;
+}
+.price small {
+  white-space: nowrap;
+}
+.actions > button {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.visit {
+  flex-wrap: wrap;
+}
+.visit > div {
+  flex: 1 1 180px;
+}
+.field,
+.filters,
+.metrics,
+.cards,
+.services,
+.lower,
+.row,
+.summary {
+  min-width: 0;
+}
+fieldset,
+.summary {
+  overflow-wrap: anywhere;
+}
+legend {
+  max-width: 100%;
+  white-space: normal;
+}
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+input[type="date"],
+input[type="time"] {
+  min-inline-size: 0;
+}
+dialog {
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 32px);
+  padding: 28px;
+}
+dialog::backdrop {
+  touch-action: none;
+}
+dialog .close {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: white;
+  border-radius: 50%;
+}
+dialog h2 {
+  padding-right: 36px;
+  font-size: clamp(21px, 3vw, 24px);
+}
+dialog .row {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+dialog .actions {
+  gap: 8px;
+}
+.slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(86px, 1fr));
+}
+.slot {
+  min-width: 0;
+  min-height: 44px;
+}
+.block-item {
+  flex-wrap: wrap;
+}
+@media (min-width: 1700px) {
+  :root {
+    --page-gutter: clamp(60px, 5vw, 120px);
+  }
+}
+@media (min-width: 961px) and (max-width: 1200px) {
+  :root {
+    --sidebar-width: 216px;
+    --page-gutter: 28px;
+  }
+  #sidebar {
+    padding-inline: 20px;
+  }
+  #sidebar .brand {
+    font-size: 20px;
+  }
+  .services {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .lower {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 960px) {
+  :root {
+    --page-gutter: 24px;
+  }
+  #sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: min(296px, calc(100vw - 40px));
+    height: 100dvh;
+    padding: 30px 20px 24px;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 0;
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition: transform 0.2s ease;
+    overflow-y: auto;
+  }
+  #sidebar .brand {
+    margin-top: 40px;
+    font-size: 21px;
+  }
+  #sidebar .brand small {
+    font-size: 9px;
+  }
+  #sidebar .sidebottom {
+    display: block;
+    margin-top: 32px;
+  }
+  #sidebar nav {
+    width: 100%;
+    margin-top: 28px;
+  }
+  #sidebar nav button {
+    font-size: 14px;
+  }
+  .navigation-open #sidebar {
+    transform: translateX(0);
+    visibility: visible;
+  }
+  .sidebar-close {
+    display: grid;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    color: white;
+    border-color: #43554b;
+  }
+  .navigation-toggle {
+    display: grid;
+  }
+  .mobile-brand {
+    display: block;
+    font:
+      800 17px Manrope,
+      sans-serif;
+    white-space: nowrap;
+  }
+  .mobile-brand > span {
+    color: var(--orange);
+  }
+  main {
+    margin-left: 0;
+    padding: 0 var(--page-gutter) 24px;
+  }
+  .app-header {
+    position: sticky;
+    top: 0;
+    min-height: 84px;
+    background: var(--paper);
+    gap: 12px;
+    padding-block: 12px;
+  }
+  .header-labels .crumb {
+    margin-top: 4px;
+    font-size: 11px;
+  }
+  .header-labels .crumb > span[aria-hidden] {
+    display: none;
+  }
+  .header-labels .crumb {
+    font-size: 0;
+  }
+  .header-labels #breadcrumb {
+    font-size: 11px;
+  }
+  .profile-trigger {
+    padding: 5px 6px;
+    gap: 8px;
+  }
+  .services {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .lower {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .hero {
+    min-height: 300px;
+    padding: 30px;
+  }
+  .hero img {
+    width: 70%;
+  }
+  .hero h2 {
+    font-size: clamp(28px, 4.5vw, 38px);
+  }
+  .bookingCard,
+  .clientCard {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .bookingCard > .actions,
+  .clientCard > .actions {
+    max-width: none;
+  }
+  .profile-menu nav {
+    display: grid;
+  }
+}
+@media (max-width: 600px) {
+  :root {
+    --page-gutter: 16px;
+  }
+  .app-header {
+    min-height: 76px;
+    gap: 8px;
+  }
+  .header-location {
+    gap: 10px;
+  }
+  .mobile-brand {
+    font-size: 16px;
+  }
+  .profile-greeting {
+    display: none;
+  }
+  .profile-trigger {
+    padding: 4px;
+    gap: 4px;
+  }
+  .profile-trigger .avatar {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+  }
+  .profile-chevron {
+    width: 14px;
+    height: 14px;
+  }
+  .profile-menu {
+    width: min(280px, calc(100vw - 32px));
+  }
+  .intro {
+    gap: 16px;
+    padding: 24px 0 20px;
+  }
+  .intro > div {
+    flex: 1 1 100%;
+  }
+  .intro > .actions,
+  .intro > button {
+    width: 100%;
+  }
+  .intro > .actions > button {
+    flex: 1 1 140px;
+  }
+  h1 {
+    font-size: clamp(23px, 6vw, 28px);
+    line-height: 1.25;
+  }
+  .today {
+    display: none;
+  }
+  .hero {
+    min-height: 320px;
+    padding: 24px;
+  }
+  .hero img {
+    width: 100%;
+    opacity: 0.65;
+    object-position: 66% center;
+  }
+  .hero::after {
+    background: linear-gradient(
+      90deg,
+      #172a23f5 0%,
+      #172a23c9 60%,
+      #172a2355 100%
+    );
+  }
+  .hero h2 {
+    font-size: clamp(26px, 7.5vw, 34px);
+    line-height: 1.2;
+  }
+  .hero .eyebrow {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+  }
+  .hero p {
+    max-width: 270px;
+  }
+  .hero p br {
+    display: none;
+  }
+  .hero .primary {
+    padding: 13px 16px;
+  }
+  .sectionhead {
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 26px;
+  }
+  .sectionhead h2 {
+    font-size: 18px;
+  }
+  .services {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .service {
+    display: flex;
+    padding: 20px;
+  }
+  .service h3 {
+    margin-top: 16px;
+    padding-right: 0;
+  }
+  .service .price small {
+    display: inline;
+    margin-left: 8px;
+  }
+  .metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .metric {
+    padding: 14px;
+  }
+  .metric strong {
+    font-size: clamp(17px, 5vw, 21px);
+  }
+  .metric > span {
+    line-height: 1.5;
+  }
+  .filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .filters > .field:first-child {
+    grid-column: 1/-1;
+  }
+  .filters .check {
+    align-self: end;
+  }
+  .row,
+  dialog .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .agenda-week,
+  .agenda-month {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .appointment {
+    padding: 18px;
+  }
+  .actions {
+    gap: 8px;
+  }
+  .bookingCard > .actions,
+  .clientCard > .actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+  .bookingCard > .actions > button:first-child,
+  .clientCard > .actions > button:first-child {
+    grid-column: 1/-1;
+  }
+  .bookingCard > .actions > button,
+  .clientCard > .actions > button {
+    width: 100%;
+  }
+  .visit {
+    align-items: start;
+    gap: 8px;
+    padding: 16px;
+  }
+  .visit > div {
+    flex-basis: 100%;
+  }
+  dialog {
+    width: calc(100vw - 24px);
+    max-width: calc(100vw - 24px);
+    max-height: calc(100dvh - 24px);
+    padding: 20px;
+  }
+  #confirmDialog {
+    width: calc(100vw - 24px);
+  }
+  .summary {
+    padding: 14px;
+  }
+  .metrics.compact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  dialog input,
+  dialog select,
+  dialog textarea,
+  .filters input,
+  .filters select {
+    font-size: 16px;
+  }
+  footer {
+    display: grid;
+    gap: 8px;
+    font-size: 11px;
+    line-height: 1.6;
+  }
+}
+@media (max-width: 359px) {
+  :root {
+    --page-gutter: 12px;
+  }
+  .header-location {
+    gap: 8px;
+  }
+  .mobile-brand {
+    font-size: 14px;
+  }
+  .hero {
+    padding: 20px;
+  }
+  .filters,
+  .metrics.compact {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #sidebar,
+  .profile-chevron {
+    transition: none;
+  }
+}

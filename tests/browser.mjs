@@ -1,36 +1,12 @@
 import { createRequire } from "node:module";
-import { createServer } from "node:http";
-import { readFile, mkdir } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
+import { mkdir } from "node:fs/promises";
+import { startTestServer } from "./server.mjs";
 import path from "node:path";
 import assert from "node:assert/strict";
 const require = createRequire(import.meta.url);
 const { chromium } = require("playwright");
-const root = fileURLToPath(new URL("../dist", import.meta.url));
-const server = createServer(async (req, res) => {
-  try {
-    const name = new URL(req.url, "http://localhost").pathname;
-    const file = path.join(root, name === "/" ? "index.html" : name);
-    if (!file.startsWith(root + path.sep)) {
-      res.writeHead(403);
-      return res.end();
-    }
-    res.setHeader(
-      "Content-Type",
-      file.endsWith(".js")
-        ? "text/javascript"
-        : file.endsWith(".css")
-          ? "text/css"
-          : "text/html",
-    );
-    res.end(await readFile(file));
-  } catch {
-    res.writeHead(404);
-    res.end();
-  }
-});
-await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
-const origin = `http://127.0.0.1:${server.address().port}`;
+const server = await startTestServer();
+const { origin } = server;
 let browser;
 try {
   browser = await chromium.launch({
@@ -53,7 +29,11 @@ try {
   await page.goto(origin);
   await page.locator("#home .service").first().waitFor();
   assert.equal(await page.locator("#storageError").isVisible(), false);
-  const nav = async (view) => page.locator(`nav [data-view="${view}"]`).click();
+  const nav = async (view) => {
+    if (await page.locator("#navigationToggle").isVisible())
+      await page.locator("#navigationToggle").click();
+    await page.locator(`#sidebar [data-view="${view}"]`).click();
+  };
   const close = async () => {
     if (await page.locator("#editor").isVisible())
       await page.locator("#editor [data-close]").click();
